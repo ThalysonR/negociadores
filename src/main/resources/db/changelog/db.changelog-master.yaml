@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: thalyson
+      changes:
+        - createTable:
+            tableName: pessoa
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column: 
+                  name: nome
+                  type: varchar(100)
+              - column:
+                  name: email
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: senha
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: comprador
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: id_pessoa
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_comprador_pessoa
+                    references: pessoa(id)
+        - createTable:
+            tableName: empresa
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nome
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:
+            tableName: fornecedor
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: id_pessoa
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_fornecedor_pessoa
+                    references: pessoa(id)
+              - column:
+                  name: id_empresa
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_fornecedor_empresa
+                    references: empresa(id)
+          
